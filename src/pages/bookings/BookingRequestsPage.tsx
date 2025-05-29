@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import Navigation from '@/components/Navigation';
 import { Check, X, Clock, BedDouble, User, Calendar, CreditCard, FileText, Trash2, Mail, Phone } from 'lucide-react';
@@ -26,10 +25,9 @@ interface BookingRequest {
 }
 
 export default function BookingRequestsPage() {
-  const navigate = useNavigate();
   const [requests, setRequests] = useState<BookingRequest[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [, setError] = useState('');
   const [selectedRequest, setSelectedRequest] = useState<BookingRequest | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
 
@@ -106,7 +104,7 @@ export default function BookingRequestsPage() {
         .eq('id', requestId);
 
       if (error) throw error;
-      
+
       toast.success('Solicitação rejeitada com sucesso');
       fetchBookingRequests();
     } catch (error) {
@@ -180,9 +178,8 @@ export default function BookingRequestsPage() {
               {requests.map((request) => (
                 <div
                   key={request.id}
-                  className={`border rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer ${
-                    selectedRequest?.id === request.id ? 'border-primary' : 'border-gray-200'
-                  }`}
+                  className={`border rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer ${selectedRequest?.id === request.id ? 'border-primary' : 'border-gray-200'
+                    }`}
                   onClick={() => setSelectedRequest(request)}
                 >
                   <div className="flex items-start justify-between">
@@ -191,7 +188,7 @@ export default function BookingRequestsPage() {
                       <p className="text-sm text-gray-500">{request.guest_email}</p>
                       <p className="text-sm text-gray-500">{request.guest_phone}</p>
                     </div>
-                    
+
                     <div className="text-right">
                       <p className="text-sm font-medium">
                         Quarto {request.room.number} - {request.room.room_type}
@@ -209,9 +206,8 @@ export default function BookingRequestsPage() {
                   <div className="mt-4 flex items-center justify-between">
                     <div className="flex items-center space-x-2">
                       <span
-                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                          getStatusBadgeColor(request.status)
-                        }`}
+                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusBadgeColor(request.status)
+                          }`}
                       >
                         {request.status === 'pending' && <Clock className="h-3 w-3 mr-1" />}
                         {request.status === 'approved' && <Check className="h-3 w-3 mr-1" />}
@@ -239,7 +235,7 @@ export default function BookingRequestsPage() {
           {selectedRequest ? (
             <div className="p-6">
               <h3 className="text-lg font-semibold mb-6">Detalhes da Solicitação</h3>
-              
+
               <div className="space-y-6">
                 {/* Guest Info */}
                 <div className="space-y-4">

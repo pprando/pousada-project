@@ -72,7 +72,7 @@ export default function MenuControlPage() {
   const checkAuth = async () => {
     try {
       const { data: session } = await supabase.auth.getSession();
-      
+
       if (!session.session) {
         navigate('/login');
         return;
@@ -113,7 +113,8 @@ export default function MenuControlPage() {
       const occupiedRooms = data
         .filter(booking => booking.room)
         .map(booking => ({
-          number: booking.room.number,
+          number: booking.room[0]
+          .number,
           guest_name: booking.guest_name
         }));
 
@@ -137,13 +138,13 @@ export default function MenuControlPage() {
 
     setOrder(prev => {
       const existingItem = prev.items.find(i => i.id === item.id);
-      
+
       if (existingItem) {
         toast.success(`${item.name} (${existingItem.quantity! + 1}x)`);
         return {
           ...prev,
-          items: prev.items.map(i => 
-            i.id === item.id 
+          items: prev.items.map(i =>
+            i.id === item.id
               ? { ...i, quantity: i.quantity! + 1 }
               : i
           ),
@@ -166,11 +167,11 @@ export default function MenuControlPage() {
       if (item && item.quantity === 1) {
         toast.error(`${name} removido`);
       }
-      
+
       return {
         ...prev,
         items: prev.items
-          .map(item => 
+          .map(item =>
             item.id === itemId && item.quantity! > 0
               ? { ...item, quantity: item.quantity! - 1 }
               : item
@@ -195,7 +196,7 @@ export default function MenuControlPage() {
       roomNumber,
       guestName: room.guest_name || ''
     }));
-    
+
     toast.success(`Quarto ${roomNumber} selecionado`);
   };
 
@@ -207,7 +208,7 @@ export default function MenuControlPage() {
 
     try {
       const { data: session } = await supabase.auth.getSession();
-      
+
       if (!session.session) {
         navigate('/login');
         return;
@@ -246,7 +247,7 @@ export default function MenuControlPage() {
       setSelectedRoom('');
       setGuestName('');
       toast.success('Pedido registrado com sucesso!');
-      
+
       navigate('/menu/orders');
     } catch (error) {
       console.error('Erro ao registrar pedido:', error);
@@ -387,7 +388,7 @@ export default function MenuControlPage() {
                     </div>
                   )}
                 </div>
-                
+
                 <div className="flex-1 overflow-y-auto px-6">
                   <div className="space-y-4">
                     {order.items.map(item => (

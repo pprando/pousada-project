@@ -3,14 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import Navigation from '@/components/Navigation';
 import { BedDouble } from 'lucide-react';
-import { toast } from 'sonner';
 
-interface Room {
-  id: string;
-  number: string;
-  room_type: string;
-  daily_rate: number;
-}
 
 interface FormData {
   guestName: string;
@@ -29,7 +22,7 @@ export default function BookingRequestForm() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [selectedRoom, setSelectedRoom] = useState<string>('');
+  const [selectedRoom] = useState<string>('');
   const [formData, setFormData] = useState<FormData>({
     guestName: '',
     guestEmail: '',
