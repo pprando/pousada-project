@@ -42,16 +42,18 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-moss via-sage to-sand">
       {/* Header */}
-      <header className="border-b bg-white/80 backdrop-blur-sm">
+<header className="border-b bg-white/80 backdrop-blur-sm py-2 sm:py-4">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="flex items-center space-x-2">
-            <img
-              src="/images/WhatsApp_Image_2025-05-28_at_09.12.11-removebg-preview.png"
-              alt=""
-              className="h-11 w-auto object-contain -translate-y--1"
-            />
+       <img
+  src="/images/WhatsApp_Image_2025-05-28_at_09.12.11-removebg-preview.png"
+  alt="InnScheduler Logo"
+className="h-28 sm:h-24 md:h-32 lg:h-[100px] xl:h-[240px] w-auto object-contain mt-4 translate-y-2"
+/>
 
-            <span className="text-xl font-bold text-black">InnScheduler</span>
+
+
+
           </div>
           <nav className="hidden md:flex items-center space-x-8">
             <a href="#features" className="text-black hover:text-moss">Funcionalidades</a>
